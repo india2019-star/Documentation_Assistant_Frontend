@@ -1,0 +1,28 @@
+
+.centered-div {
+  margin: 0;
+  display: grid;
+  place-items: center;
+  margin-top: 15%;
+}
+
+
+h3 {
+  font-size: 4rem;
+  font-family: cursive;
+  color: whitesmoke;
+}
+
+h4 {
+  font-size: 3rem;
+  margin-top: 50px;
+  font-weight: bold;
+  color: whitesmoke;
+}
+
+
+.custom-style {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

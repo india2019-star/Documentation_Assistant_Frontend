@@ -1,0 +1,10 @@
+#aboutdiv{
+    margin-top: 200px;
+    margin-bottom: 500px;
+}
+
+h1,p{
+    font-size: large;
+    font-weight: bold;
+    color: whitesmoke;
+}

@@ -1,0 +1,25 @@
+
+.container {
+    width: 1519px;
+    max-width: 2000px;
+    padding: 0 15px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 60px;
+    z-index: 1000;
+    background-color: #f8f9fa;
+
+    /* Ensure it stays above other content */
+}
+
+h5{
+    margin-top: 1rem; 
+    font-size: large; 
+    font-weight: bold;
+}
+

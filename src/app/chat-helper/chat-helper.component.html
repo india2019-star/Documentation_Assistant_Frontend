@@ -1,0 +1,32 @@
+<!-- <div class="container text-center">
+    <input #inputPrompt type="text" placeholder="Searc..."/> -->
+    <!-- <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar> -->
+    <!-- <button class="search-button" (click)="findAnswer(inputPrompt.value)" [disabled]="disableBtn">Ask..</button>
+    <h4 class="text-center">{{answer}}</h4>
+</div> -->
+
+<div class="container">
+    <div class="messages mat-elevation-z7">
+        <div class="chat-area">
+            <div *ngFor="let message of allChatMessage$ | async" 
+                 class="chat-bubble-container" 
+                 [ngClass]="{'human' : message.senderType === 'human'}">
+                <div class="chat-bubble">
+                    {{message.message}}
+                    <span class="chat-date">
+                        {{currenDate | date:'shortDate'}}
+                    </span>
+                </div>
+            </div>
+            <div #endOfChat></div>
+        </div>
+        <div class="input-area">
+            <mat-form-field appearance="outline">
+                <input [formControl]="inputFormControl" matInput placeholder="Start typing..." (keydown.enter)="findAnswer()">
+                <button (click)="findAnswer()" mat-icon-button matSuffix>
+                    <mat-icon>send</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </div>
+</div>

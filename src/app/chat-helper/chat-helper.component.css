@@ -1,0 +1,59 @@
+.container{
+    display: flex;
+    justify-content: center;
+}
+.chat-list{
+    width: 20%;
+    height: 70vh;
+    margin: 16px;
+    margin-left: 20%;
+    background: #c5cae9;
+    border-radius: 16px;
+}
+
+.messages{
+    width: 40%;
+    height: 70vh;
+    margin: 16px;
+    background-color: #c5cae9;
+    border-radius: 16px;
+}
+
+.chat-area{
+    margin: 20px;
+    height: 55vh;
+    overflow: auto;
+}
+
+.chat-bubble-container{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.chat-bubble-container.human{
+    justify-content: flex-end;
+}
+
+.chat-bubble{
+    background: white;
+    padding: 8px 100px 18px 8px;
+    margin: 4px;
+    border-radius: 8px;
+    width: fit-content;
+    position: relative;
+}
+
+.chat-date{
+    position: absolute;
+    bottom: 2px;
+    right: 8px;
+    font-size: 0.7rem;
+}
+
+.input-area > mat-form-field{
+    width: 100%;
+}
+.input-area{
+    margin: 15px;
+}
