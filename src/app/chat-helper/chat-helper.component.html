@@ -23,9 +23,10 @@
         <div class="input-area">
             <mat-form-field appearance="outline">
                 <input [formControl]="inputFormControl" matInput placeholder="Start typing..." (keydown.enter)="findAnswer()">
-                <button (click)="findAnswer()" mat-icon-button matSuffix>
+                <button *ngIf="!loading" (click)="findAnswer()" mat-icon-button matSuffix>
                     <mat-icon>send</mat-icon>
                 </button>
+                <mat-spinner *ngIf="loading" matSuffix [mode]="spinnerMode" diameter="20"></mat-spinner>
             </mat-form-field>
         </div>
     </div>

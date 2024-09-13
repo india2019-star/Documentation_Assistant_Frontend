@@ -35,6 +35,10 @@
     justify-content: flex-end;
 }
 
+.chat-bubble-container.human > .chat-bubble{
+    background-color: burlywood;
+}
+
 .chat-bubble{
     background: white;
     padding: 8px 100px 18px 8px;

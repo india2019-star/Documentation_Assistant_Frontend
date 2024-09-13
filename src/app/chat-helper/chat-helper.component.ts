@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { finalize, Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, finalize, Observable, of, Subscription, tap } from 'rxjs';
 import { ChatBotService } from '../services/chat-bot.service';
 import { FormControl, Validators } from '@angular/forms';
 import { ChatMessage } from '../models/chat-message';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-chat-helper',
@@ -14,33 +15,43 @@ export class ChatHelperComponent implements OnInit, OnDestroy {
   @ViewChild('endOfChat', {static: true})
   endOfChat! : ElementRef;
 
-  disableBtn: boolean = false;
-  loading: boolean = false;
+
+  spinnerMode: ProgressSpinnerMode = 'indeterminate';
+  loading: boolean = false
   answer: string = "";
   chatHistory: any = [];
   subscription$: Subscription[] = [];
   inputFormControl : FormControl = new FormControl('');
-  allChatMessage$ : Observable<ChatMessage[]> | undefined;
+  
   allChatMessages : ChatMessage[] = [];
+  chatMessageSubject = new BehaviorSubject<ChatMessage[]>(this.allChatMessages);
+  allChatMessage$ = this.chatMessageSubject.asObservable();
   currenDate: Date = new Date();
+  timeOutVar : any;
 
   constructor(private genericService: ChatBotService){}
   ngOnDestroy(): void {
     this.subscription$.forEach(sub => sub.unsubscribe());
+    if(this.timeOutVar){
+      clearInterval(this.timeOutVar);
+    }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    this.subscription$.push(this.allChatMessage$
+      .subscribe(resp => {
+        this.scrollToBottom();
+      }));
+  }
 
   findAnswer(){
     let promptVal: string = this.inputFormControl.value;
     console.log(promptVal);
     if(promptVal.length > 0){
       this.allChatMessages.push({message: promptVal, senderType: 'human'});
-      this.allChatMessage$ = of(this.allChatMessages);
-      this.subscription$.push(this.allChatMessage$.subscribe(resp => {
-        this.scrollToBottom();
-      } ));
-      this.disableBtn = true;
+      this.chatMessageSubject.next(this.allChatMessages);
+      this.inputFormControl.disable();
       this.loading = true;
       this.inputFormControl.setValue('');
       
@@ -55,13 +66,15 @@ export class ChatHelperComponent implements OnInit, OnDestroy {
       this.subscription$.push(this.genericService.retrieveAnswer(inputPrompt).pipe(
         finalize(() => {
           this.loading = false;
-          this.disableBtn = false;
+          this.inputFormControl.enable();
         })
       ).subscribe((res: string) => {
         if(res && res.length > 0){
           this.answer = res;
           this.chatHistory.push({"human": promptVal});
           this.chatHistory.push({"ai": res});
+          this.allChatMessages.push({message: res, senderType: 'AI'});
+          this.chatMessageSubject.next(this.allChatMessages);
         }
        
         console.log(res);
@@ -74,7 +87,7 @@ export class ChatHelperComponent implements OnInit, OnDestroy {
   }
 
   scrollToBottom(){
-    setTimeout(() => {
+    this.timeOutVar = setTimeout(() => {
       if(this.endOfChat){
         this.endOfChat.nativeElement.scrollIntoView({behaviour: 'smooth'});
       }
