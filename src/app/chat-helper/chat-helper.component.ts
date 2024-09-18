@@ -4,6 +4,8 @@ import { ChatBotService } from '../services/chat-bot.service';
 import { FormControl, Validators } from '@angular/forms';
 import { ChatMessage } from '../models/chat-message';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import { ChatRequest } from '../models/chat-request';
+import { ChatResponse } from '../models/chat-response';
 
 @Component({
   selector: 'app-chat-helper',
@@ -57,9 +59,9 @@ export class ChatHelperComponent implements OnInit, OnDestroy {
       
       console.log(this.chatHistory)
       this.answer = "";
-      let inputPrompt = {
+      let inputPrompt : ChatRequest = {
         "question": promptVal,
-        "chatHistory": this.chatHistory
+        "chat_history": this.chatHistory
       }
 
       
@@ -68,12 +70,12 @@ export class ChatHelperComponent implements OnInit, OnDestroy {
           this.loading = false;
           this.inputFormControl.enable();
         })
-      ).subscribe((res: string) => {
-        if(res && res.length > 0){
-          this.answer = res;
+      ).subscribe((res: ChatResponse) => {
+        if(res && res.answer.length > 0){
+          this.answer = res.answer;
           this.chatHistory.push({"human": promptVal});
-          this.chatHistory.push({"ai": res});
-          this.allChatMessages.push({message: res, senderType: 'AI'});
+          this.chatHistory.push({"ai": res.answer});
+          this.allChatMessages.push({message: res.answer, senderType: 'AI'});
           this.chatMessageSubject.next(this.allChatMessages);
         }
        
