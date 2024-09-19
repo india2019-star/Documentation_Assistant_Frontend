@@ -1,4 +1,5 @@
 export interface ChatMessage{
     message: string,
-    senderType: string
+    senderType: string,
+    sourceDocuments?: string
 }

@@ -75,7 +75,7 @@ export class ChatHelperComponent implements OnInit, OnDestroy {
           this.answer = res.answer;
           this.chatHistory.push({"human": promptVal});
           this.chatHistory.push({"ai": res.answer});
-          this.allChatMessages.push({message: res.answer, senderType: 'AI'});
+          this.allChatMessages.push({message: res.answer, senderType: 'ai', sourceDocuments: res.sourceDocuments});
           this.chatMessageSubject.next(this.allChatMessages);
         }
        

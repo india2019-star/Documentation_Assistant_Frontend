@@ -61,3 +61,10 @@
 .input-area{
     margin: 15px;
 }
+
+.source-docs-style{
+    display: flex;
+    margin-top: 10px;
+    font-weight: bold;
+    white-space: pre-line;
+}

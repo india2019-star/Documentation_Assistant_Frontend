@@ -1,10 +1,3 @@
-<!-- <div class="container text-center">
-    <input #inputPrompt type="text" placeholder="Searc..."/> -->
-    <!-- <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar> -->
-    <!-- <button class="search-button" (click)="findAnswer(inputPrompt.value)" [disabled]="disableBtn">Ask..</button>
-    <h4 class="text-center">{{answer}}</h4>
-</div> -->
-
 <div class="container">
     <div class="messages mat-elevation-z7">
         <div class="chat-area">
@@ -13,6 +6,9 @@
                  [ngClass]="{'human' : message.senderType === 'human'}">
                 <div class="chat-bubble">
                     {{message.message}}
+                    <span *ngIf="message.senderType === 'ai'" class="source-docs-style">
+                        {{message.sourceDocuments}}
+                    </span>
                     <span class="chat-date">
                         {{currenDate | date:'shortDate'}}
                     </span>
