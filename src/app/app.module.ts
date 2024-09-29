@@ -15,13 +15,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MultipleFileUploadComponent } from './multiple-file-upload/multiple-file-upload.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AboutComponent,
-    ChatHelperComponent
+    ChatHelperComponent,
+    MultipleFileUploadComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatProgressBarModule
+    
 ],
   providers: [],
   bootstrap: [AppComponent]

@@ -68,3 +68,19 @@
     font-weight: bold;
     white-space: pre-line;
 }
+
+.ingestion-list{
+    width: 20%;
+    margin: 16px;
+    background-color: #c5cae9;
+    border-radius: 16px;
+}
+
+.ingestion-header{
+    margin: 10px;
+    font-size: large;
+}
+
+.file-input {
+    display: none;
+  }

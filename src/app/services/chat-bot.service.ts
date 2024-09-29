@@ -19,4 +19,16 @@ export class ChatBotService {
   ingestDocuments(){
     return this.httpClient.get("http://localhost:8000/ingest-code")
   }
+
+  uploadDocumentsFromUser(file : File){
+    const formData: FormData = new FormData();
+
+    formData.append('file', file);
+
+    return this.httpClient.post("http://localhost:8000/file-upload", formData,{
+      reportProgress: true,
+      observe: 'events',
+      responseType: "json"
+    });
+  }
 }

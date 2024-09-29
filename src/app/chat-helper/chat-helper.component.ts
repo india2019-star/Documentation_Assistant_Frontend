@@ -6,6 +6,7 @@ import { ChatMessage } from '../models/chat-message';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { ChatRequest } from '../models/chat-request';
 import { ChatResponse } from '../models/chat-response';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-chat-helper',
@@ -17,7 +18,8 @@ export class ChatHelperComponent implements OnInit, OnDestroy {
   @ViewChild('endOfChat', {static: true})
   endOfChat! : ElementRef;
 
-
+  fileName = '';
+  uploadProgress: number = 0;
   spinnerMode: ProgressSpinnerMode = 'indeterminate';
   loading: boolean = false
   answer: string = "";
@@ -30,6 +32,13 @@ export class ChatHelperComponent implements OnInit, OnDestroy {
   allChatMessage$ = this.chatMessageSubject.asObservable();
   currenDate: Date = new Date();
   timeOutVar : any;
+
+
+  selectedFiles?: FileList;
+  progressInfos: any[] = [];
+  message: string[] = [];
+
+  fileInfos?: Observable<any>;
 
   constructor(private genericService: ChatBotService){}
   ngOnDestroy(): void {
@@ -45,6 +54,12 @@ export class ChatHelperComponent implements OnInit, OnDestroy {
       .subscribe(resp => {
         this.scrollToBottom();
       }));
+  }
+
+  
+
+  cancelUpload(){
+    this.uploadProgress = 0;
   }
 
   findAnswer(){

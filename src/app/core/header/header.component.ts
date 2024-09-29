@@ -13,7 +13,8 @@ export class HeaderComponent implements OnInit {
   availableRoutesAndBtns: {[routeUrl: string]: string} = {
     '/' : 'button1',
     '/chatBot' : 'button2',
-    '/aboutUs' : 'button3'
+    '/aboutUs' : 'button3',
+    '/fileupload' : 'button4'
   };
 
 
