@@ -27,8 +27,7 @@ export class ChatBotService {
 
     return this.httpClient.post("http://localhost:8000/file-upload", formData,{
       reportProgress: true,
-      observe: 'events',
-      responseType: "json"
+      observe: 'events'
     });
   }
 }

@@ -12,6 +12,7 @@ export class MultipleFileUploadComponent implements OnInit, OnDestroy {
 
 
   selectedFiles?: FileList;
+  selectFilesInArrayFormat : File[] = [];
   progressInfos: any[] = [];
   message: string[] = [];
 
@@ -30,6 +31,7 @@ export class MultipleFileUploadComponent implements OnInit, OnDestroy {
     this.message = [];
     this.progressInfos = [];
     this.selectedFiles = event.target.files;
+    this.selectFilesInArrayFormat = Array.from(event.target.files);
   }
 
   uploadFiles(): void {
