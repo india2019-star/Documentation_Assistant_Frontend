@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ChatBotService } from '../services/chat-bot.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
@@ -10,12 +10,16 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 })
 export class MultipleFileUploadComponent implements OnInit, OnDestroy {
 
+  @Output()
+  ingestionInProgessEventEmitter : EventEmitter<{uploadedFileCnt : number, totalFiles : number}> = new EventEmitter<{uploadedFileCnt : number, totalFiles : number}>();
+
+
 
   selectedFiles?: FileList;
   selectFilesInArrayFormat : File[] = [];
-  progressInfos: any[] = [];
+  progressInfos: { value: number, fileName: string }[] = [];
   message: string[] = [];
-
+  uploadedFileCnt = 0;
   fileInfos?: Observable<any>;
   subscription$ : Subscription[] = [];
   constructor(private genericService: ChatBotService) { }
@@ -36,7 +40,7 @@ export class MultipleFileUploadComponent implements OnInit, OnDestroy {
 
   uploadFiles(): void {
     this.message = [];
-  
+    this.uploadedFileCnt = 0;
     if (this.selectedFiles) {
       for (let i = 0; i < this.selectedFiles.length; i++) {
         this.upload(i, this.selectedFiles[i]);
@@ -57,6 +61,10 @@ export class MultipleFileUploadComponent implements OnInit, OnDestroy {
           }else if(res instanceof HttpResponse){
             const msg = 'Uploaded the file successfully: ' + file.name;
             this.message.push(msg);
+            this.ingestionInProgessEventEmitter.emit({
+              uploadedFileCnt : ++this.uploadedFileCnt,
+              totalFiles : this.selectFilesInArrayFormat.length
+            });
           }
         }, error =>{
 

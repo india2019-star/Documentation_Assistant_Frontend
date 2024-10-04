@@ -1,16 +1,13 @@
 <div class="container">
+
     <div class="ingestion-list mat-elevation-z7">
-        <h5 class="ingestion-header"><b><u>Ingest Documents</u></b></h5>
-        <div class="doc-ingestion-area">
-           
-        <app-multiple-file-upload></app-multiple-file-upload>
-        </div>
+        <h5 class="ingestion-header"><b><u>Ingest Documents</u></b></h5><br /><br />
+        <app-multiple-file-upload (ingestionInProgessEventEmitter)="ingestionEvent($event)"></app-multiple-file-upload>
     </div>
     <div class="messages mat-elevation-z7">
         <div class="chat-area">
-            <div *ngFor="let message of allChatMessage$ | async" 
-                 class="chat-bubble-container" 
-                 [ngClass]="{'human' : message.senderType === 'human'}">
+            <div *ngFor="let message of allChatMessage$ | async" class="chat-bubble-container"
+                [ngClass]="{'human' : message.senderType === 'human'}">
                 <div class="chat-bubble">
                     {{message.message}}
                     <span *ngIf="message.senderType === 'ai'" class="source-docs-style">
@@ -25,7 +22,8 @@
         </div>
         <div class="input-area">
             <mat-form-field appearance="outline">
-                <input [formControl]="inputFormControl" matInput placeholder="Start typing..." (keydown.enter)="findAnswer()">
+                <input [formControl]="inputFormControl" matInput placeholder="Start typing..."
+                    (keydown.enter)="findAnswer()">
                 <button *ngIf="!loading" (click)="findAnswer()" mat-icon-button matSuffix>
                     <mat-icon>send</mat-icon>
                 </button>

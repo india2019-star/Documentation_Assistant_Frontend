@@ -17,6 +17,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MultipleFileUploadComponent } from './multiple-file-upload/multiple-file-upload.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import { MultipleFileUploadComponent } from './multiple-file-upload/multiple-fil
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatRadioModule,
+    MatCardModule
     
 ],
   providers: [],

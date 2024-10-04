@@ -70,10 +70,12 @@
 }
 
 .ingestion-list{
-    width: 20%;
+    width: 25%;
     margin: 16px;
     background-color: #c5cae9;
     border-radius: 16px;
+    height: 68vh;
+    overflow: auto;
 }
 
 .ingestion-header{
@@ -81,6 +83,3 @@
     font-size: large;
 }
 
-.file-input {
-    display: none;
-  }
