@@ -88,8 +88,11 @@ export class ChatHelperComponent implements OnInit, OnDestroy {
       ).subscribe((res: ChatResponse) => {
         if(res && res.answer.length > 0){
           this.answer = res.answer;
-          this.chatHistory.push({"human": promptVal});
-          this.chatHistory.push({"ai": res.answer});
+          if(["Hi there, How can I help you?", "Glad I could help, Bye Bye..."].indexOf(res.answer) === -1){
+            this.chatHistory.push({"human": promptVal});
+            this.chatHistory.push({"ai": res.answer});
+          }
+          
           this.allChatMessages.push({message: res.answer, senderType: 'ai', sourceDocuments: res.sourceDocuments});
           this.chatMessageSubject.next(this.allChatMessages);
         }
