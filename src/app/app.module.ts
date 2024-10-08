@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ChatHelperComponent } from './chat-helper/chat-helper.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -19,6 +19,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { MultipleFileUploadComponent } from './multiple-file-upload/multiple-file-upload.component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCardModule} from '@angular/material/card';
+import { RestHttpInterceptorInterceptor } from './services/rest-http-interceptor.interceptor';
 
 
 @NgModule({
@@ -47,7 +48,11 @@ import {MatCardModule} from '@angular/material/card';
     MatCardModule
     
 ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: RestHttpInterceptorInterceptor, multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
