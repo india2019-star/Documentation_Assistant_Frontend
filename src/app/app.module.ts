@@ -20,6 +20,7 @@ import { MultipleFileUploadComponent } from './multiple-file-upload/multiple-fil
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCardModule} from '@angular/material/card';
 import { RestHttpInterceptorInterceptor } from './services/rest-http-interceptor.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -45,7 +46,17 @@ import { RestHttpInterceptorInterceptor } from './services/rest-http-interceptor
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatRadioModule,
-    MatCardModule
+    MatCardModule,
+    ToastrModule.forRoot({
+      closeButton: true,
+      preventDuplicates: true,
+      includeTitleDuplicates: true,
+      timeOut: 5000,
+      progressBar: true,
+      progressAnimation: 'decreasing',
+      maxOpened: 5,
+      autoDismiss: true
+    })
     
 ],
   providers: [

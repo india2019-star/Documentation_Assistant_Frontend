@@ -8,11 +8,12 @@ import {
   HttpErrorResponse
 } from '@angular/common/http';
 import { catchError, Observable, tap, throwError } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class RestHttpInterceptorInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor(private toastrService: ToastrService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
@@ -20,9 +21,8 @@ export class RestHttpInterceptorInterceptor implements HttpInterceptor {
         console.log(event);
       }),
       catchError((error: HttpErrorResponse) => {
-        console.log(error);
         let errMessage = this._setError(error);
-        console.log(errMessage);
+        this.toastrService.error(errMessage);
         return throwError(error);
       })
     );
