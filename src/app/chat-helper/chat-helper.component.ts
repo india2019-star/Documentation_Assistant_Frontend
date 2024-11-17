@@ -114,9 +114,8 @@ export class ChatHelperComponent implements OnInit, OnDestroy {
     },100);
   }
 
-  ingestionEvent(event : {uploadedFileCnt : number, totalFiles : number}){
-    console.log(event);
-    if(event.uploadedFileCnt < event.totalFiles){
+  ingestionEvent(event : boolean){
+    if(event){
       this.inputFormControl.disable();
     }else{
       this.inputFormControl.enable();
