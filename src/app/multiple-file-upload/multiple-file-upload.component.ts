@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { Observable, Subscription } from 'rxjs';
 import { ChatBotService } from '../services/chat-bot.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { Functionality } from '../ircas.config';
 
 @Component({
   selector: 'app-multiple-file-upload',
@@ -12,6 +13,9 @@ export class MultipleFileUploadComponent implements OnInit, OnDestroy {
 
   @Input()
   multipleUploadFlag: boolean = true;
+
+  @Input()
+  functionality_type: string = Functionality.CHAT_ASSISTANT;
 
   @Output()
   ingestionInProgessEventEmitter : EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -59,7 +63,7 @@ export class MultipleFileUploadComponent implements OnInit, OnDestroy {
 
     if(file){
       this.subscription$.push(
-        this.genericService.uploadDocumentsFromUser(file)
+        this.genericService.uploadDocumentsFromUser(file, this.functionality_type)
         .subscribe(res =>{
           console.log(res);
           if(res.type === HttpEventType.UploadProgress){

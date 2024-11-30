@@ -17,7 +17,12 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <button mat-raised-button [disabled]="disableGenerateBtn || !summaryFormGroup.valid" class="generate-btn">Generate Summary</button>
+      <button mat-raised-button [disabled]="disableGenerateBtn || !summaryFormGroup.valid || isLoading" class="generate-btn">
+        <div class="text-spinner-alignment">
+          <span>{{ isLoading ? 'Generating' : 'Generate Summary' }}</span>
+          <mat-spinner *ngIf="isLoading" diameter="20" class="spinner"></mat-spinner>
+        </div>
+      </button>
     </form>
 
     <div *ngIf="summary !== ''" class="output-group">

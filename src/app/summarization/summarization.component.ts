@@ -12,6 +12,7 @@ export class SummarizationComponent implements OnInit {
   summaryFormGroup!: FormGroup;
   summary: string = '';
   disableGenerateBtn: boolean= false;
+  isLoading: boolean = false;
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
