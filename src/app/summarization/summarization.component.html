@@ -2,7 +2,7 @@
 
   <div class="ingestion-list mat-elevation-z7">
     <h5 class="ingestion-header"><b><u>Ingest Documents</u></b></h5><br /><br />
-    <app-multiple-file-upload (ingestionInProgessEventEmitter)="ingestionEvent($event)"></app-multiple-file-upload>
+    <app-multiple-file-upload [multipleUploadFlag]="false" (ingestionInProgessEventEmitter)="ingestionEvent($event)"></app-multiple-file-upload>
   </div>
 
   <div class="summary-generator-container">

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ChatBotService } from '../services/chat-bot.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
@@ -9,6 +9,9 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
   styleUrls: ['./multiple-file-upload.component.css']
 })
 export class MultipleFileUploadComponent implements OnInit, OnDestroy {
+
+  @Input()
+  multipleUploadFlag: boolean = true;
 
   @Output()
   ingestionInProgessEventEmitter : EventEmitter<boolean> = new EventEmitter<boolean>();

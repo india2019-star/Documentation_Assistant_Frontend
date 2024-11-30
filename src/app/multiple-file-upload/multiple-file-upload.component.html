@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <input type="file" class="file-input" multiple (change)="selectFiles($event)"  #fileUpload />
+      <input type="file" class="file-input" [multiple]="multipleUploadFlag" (change)="selectFiles($event)"  #fileUpload />
       <div class="file-upload">
     
         {{!selectedFiles || selectedFiles.length == 0? "No file uploaded yet." : selectedFiles.length + " files chosen" }}
