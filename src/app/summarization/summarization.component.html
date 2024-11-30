@@ -1,0 +1,29 @@
+<div class="container">
+
+  <div class="ingestion-list mat-elevation-z7">
+    <h5 class="ingestion-header"><b><u>Ingest Documents</u></b></h5><br /><br />
+    <app-multiple-file-upload (ingestionInProgessEventEmitter)="ingestionEvent($event)"></app-multiple-file-upload>
+  </div>
+
+  <div class="summary-generator-container">
+    <h1>Summary Generator</h1>
+
+    <form [formGroup]="summaryFormGroup" (submit)="generateSummary()">
+      <div class="input-group">
+        <mat-form-field appearance="legacy" class="custom-mat-form-field">
+          <mat-label>Summary Type</mat-label>
+          <mat-select formControlName="userSummaryChoice" (selectionChange)="handleSelectionChange($event)">
+            <mat-option *ngFor="let op of ['DETAILED', 'CONCISE']" [value]="op">{{op}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <button mat-raised-button [disabled]="disableGenerateBtn || !summaryFormGroup.valid" class="generate-btn">Generate Summary</button>
+    </form>
+
+    <div *ngIf="summary !== ''" class="output-group">
+      <h2>Summary:</h2>
+      <p>{{ summary }}</p>
+    </div>
+  </div>
+
+</div>

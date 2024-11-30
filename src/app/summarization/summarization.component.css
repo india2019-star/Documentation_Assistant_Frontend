@@ -1,0 +1,139 @@
+.container{
+  display: flex;
+  justify-content: center;
+}
+
+.summary-generator-container {
+    width: 80%;
+    height: 75vh;
+    margin-top: 10px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  
+  /* Header Styling */
+  h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    background-color: #fff;
+  }
+  
+  /* Button Styling */
+  .generate-btn {
+    display: block;
+    width: 100%;
+    padding: 2px;
+    font-size: 18px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .generate-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+  
+  .generate-btn:not(:disabled):hover {
+    background-color: #0056b3;
+  }
+  
+  /* Output Group Styling */
+  /* Output Group Styling */
+.output-group {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    max-height: 300px; /* Limit the height */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1); /* Optional for a nicer look */
+  }
+  
+  /* Output Content */
+  .output-group p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+    margin: 0; /* Remove extra margin */
+  }
+  
+  h2 {
+    color: #333;
+  }
+
+  .ingestion-list{
+    width: 25%;
+    margin: 16px;
+    background-color: #c5cae9;
+    border-radius: 16px;
+    height: 68vh;
+    overflow: auto;
+}
+
+.ingestion-header{
+    margin: 10px;
+    font-size: large;
+}
+
+
+
+
+.custom-mat-form-field {
+  width: 100%; /* Stretch to full width */
+  max-width: 400px; /* Optional: Set a maximum width */
+}
+
+.custom-mat-form-field .mat-form-field-wrapper {
+  padding: 0 8px; /* Reduce padding for a slimmer look */
+}
+
+.custom-mat-form-field .mat-select {
+  height: 36px; /* Adjust the height of the dropdown */
+  line-height: 36px; /* Ensure text aligns vertically */
+}
+
+.custom-mat-form-field .mat-select-trigger {
+  font-size: 14px; /* Adjust font size */
+  padding: 0; /* Reduce padding inside the select */
+}
+
+.custom-mat-form-field.mat-form-field-appearance-fill {
+  height: 36px; /* Adjust the height of the form field */
+}
+
+.custom-mat-form-field .mat-form-field-flex {
+  margin-top: -4px; /* Fine-tune spacing between label and select */
+}
+
+
+  
+  

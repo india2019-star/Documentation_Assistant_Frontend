@@ -21,6 +21,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatCardModule} from '@angular/material/card';
 import { RestHttpInterceptorInterceptor } from './services/rest-http-interceptor.interceptor';
 import { ToastrModule } from 'ngx-toastr';
+import { SummarizationComponent } from './summarization/summarization.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -29,7 +31,8 @@ import { ToastrModule } from 'ngx-toastr';
     HomeComponent,
     AboutComponent,
     ChatHelperComponent,
-    MultipleFileUploadComponent
+    MultipleFileUploadComponent,
+    SummarizationComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatProgressBarModule,
     MatRadioModule,
     MatCardModule,
+    MatSelectModule,
     ToastrModule.forRoot({
       closeButton: true,
       preventDuplicates: true,
