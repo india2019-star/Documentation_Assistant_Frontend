@@ -63,7 +63,7 @@ export class MultipleFileUploadComponent implements OnInit, OnDestroy {
 
     if(file){
       this.subscription$.push(
-        this.genericService.uploadDocumentsFromUser(file, this.functionality_type)
+        this.genericService.uploadDocumentsFromUser(file)
         .subscribe(res =>{
           console.log(res);
           if(res.type === HttpEventType.UploadProgress){

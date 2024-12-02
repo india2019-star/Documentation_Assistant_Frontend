@@ -76,8 +76,7 @@
 
   }
   
-  /* Output Group Styling */
-  /* Output Group Styling */
+
 .output-group {
     margin-top: 20px;
     padding: 15px;
@@ -120,6 +119,10 @@
   height: 20px;
 }
 
+
+.file-input {
+  display: none;
+}
 
 
 

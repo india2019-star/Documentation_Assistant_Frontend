@@ -1,23 +1,33 @@
 <div class="container">
 
-  <div class="ingestion-list mat-elevation-z7">
-    <h5 class="ingestion-header"><b><u>Ingest Documents</u></b></h5><br /><br />
-    <app-multiple-file-upload [multipleUploadFlag]="false" (ingestionInProgessEventEmitter)="ingestionEvent($event)"></app-multiple-file-upload>
-  </div>
 
   <div class="summary-generator-container">
     <h1>Summary Generator</h1>
 
-    <form [formGroup]="summaryFormGroup" (submit)="generateSummary()">
-      <div class="input-group">
-        <mat-form-field appearance="legacy" class="custom-mat-form-field">
-          <mat-label>Summary Type</mat-label>
-          <mat-select formControlName="userSummaryChoice" (selectionChange)="handleSelectionChange($event)">
-            <mat-option *ngFor="let op of ['DETAILED', 'CONCISE']" [value]="op">{{op}}</mat-option>
-          </mat-select>
-        </mat-form-field>
+    <form [formGroup]="summaryFormGroup">
+      <div class="row">
+        <div class="col">
+          <input type="file" class="file-input" [multiple]="false" (change)="selectFiles($event)" #fileUpload />
+          <div class="file-upload">
+        
+            {{!selectedFiles || selectedFiles.length == 0? "No file uploaded yet." : selectedFiles[0].name + " chosen" }}
+        
+            <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+              <mat-icon>attach_file</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="input-group col">
+          <mat-form-field appearance="legacy" class="custom-mat-form-field">
+            <mat-label>Summary Type</mat-label>
+            <mat-select formControlName="userSummaryChoice" (selectionChange)="handleSelectionChange($event)">
+              <mat-option *ngFor="let op of ['DETAILED', 'CONCISE']" [value]="op">{{op}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
-      <button mat-raised-button [disabled]="disableGenerateBtn || !summaryFormGroup.valid || isLoading" class="generate-btn">
+      
+      <button mat-raised-button [disabled]="isLoading || !isButtonEnabled" class="generate-btn" (click)="generateSummary()">
         <div class="text-spinner-alignment">
           <span>{{ isLoading ? 'Generating' : 'Generate Summary' }}</span>
           <mat-spinner *ngIf="isLoading" diameter="20" class="spinner"></mat-spinner>
