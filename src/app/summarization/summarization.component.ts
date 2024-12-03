@@ -83,6 +83,7 @@ export class SummarizationComponent implements OnInit, OnDestroy {
               } else if (res instanceof HttpResponse) {
                 console.log(res);
                 this.isLoading = false;
+                this.summary = res.body ? res.body.toString() : "NO SUMMARY GENERATED";
               }
             }, error => {
               this.isLoading = false;
