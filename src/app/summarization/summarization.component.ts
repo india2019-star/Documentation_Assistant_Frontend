@@ -67,7 +67,7 @@ export class SummarizationComponent implements OnInit, OnDestroy {
   generateSummary() {
     let file: File;
     if (this.selectedFiles && this.selectFilesInArrayFormat?.length > 0) {
-
+      this.summary = "";
       this.isLoading = true;
       file = this.selectedFiles[0];
       if (file) {
