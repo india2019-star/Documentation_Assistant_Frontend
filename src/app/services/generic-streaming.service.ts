@@ -41,12 +41,11 @@ export class GenericStreamingService {
         lastProcessedLength = responseText.length; // Update the tracker
 
         if (newChunk.trim()) {
-          const chunks = newChunk.replace("\n\n", "<br><br>").split('\n\n');
+          const chunks = newChunk.split('\n\n');
           chunks.forEach((chunk) => {
             if (chunk.startsWith('data:')) {
-              const data = chunk.replace('data:', '').trim();
-              const cleanedData = data.replace(/^"|"$/g, '').trim();
-              onStreamData(cleanedData); // Process new chunk
+              let cleanedData =  chunk.replace(/^data:\s*/, '').replace(/^"|"$/g, '');
+              onStreamData(cleanedData);
             }
           });
         }
