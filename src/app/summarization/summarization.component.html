@@ -37,7 +37,7 @@
 
     <div *ngIf="summary !== ''" class="output-group">
       <h2>Summary:</h2>
-      <p>{{ summary }}</p>
+      <p [innerHTML]="summary"></p>
     </div>
   </div>
 

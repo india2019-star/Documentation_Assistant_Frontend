@@ -30,6 +30,12 @@ export class ChatBotService {
     });
   }
 
+  downloadFilesFromServer(fileName: string){
+    return this.httpClient.get(`http://localhost:8000/download/${fileName}`,{
+      responseType: 'blob'
+    });
+  }
+
   summarizeDocument(file : File, summaryType: string){
     const formData: FormData = new FormData();
 

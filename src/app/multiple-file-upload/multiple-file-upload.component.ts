@@ -72,6 +72,7 @@ export class MultipleFileUploadComponent implements OnInit, OnDestroy {
               this.progressInfos[id].processingFlag = true;
             }
           }else if(res instanceof HttpResponse){
+            console.log(res);
             this.progressInfos[id].processingFlag = false;
             const msg = 'Uploaded the file successfully: ' + file.name;
             this.message.push(msg);
@@ -93,6 +94,34 @@ export class MultipleFileUploadComponent implements OnInit, OnDestroy {
         })
       );
     }
+
+  }
+
+
+  downloadFileInDocFormat(msg: string){
+    let extractedFileName: string = msg.substring(msg.indexOf(':') + 1).trim();
+    let fileNameWithOutExt: string = extractedFileName.substring(0,extractedFileName.indexOf(".pdf")) + '.docx';
+
+    console.log(fileNameWithOutExt);
+
+    this.subscription$.push(
+      this.genericService.downloadFilesFromServer(fileNameWithOutExt).subscribe((res: Blob) => {
+        const url = window.URL.createObjectURL(res);
+
+        // Create a temporary anchor element
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = fileNameWithOutExt;
+
+        // Trigger the download
+        anchor.click();
+
+        // Clean up
+        window.URL.revokeObjectURL(url);
+        anchor.remove();
+      })
+    );
+
 
   }
 

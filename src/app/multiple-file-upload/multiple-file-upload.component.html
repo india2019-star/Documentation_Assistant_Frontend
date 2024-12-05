@@ -46,7 +46,12 @@
 
 <div *ngIf="message.length > 0 &&  message.length === selectFilesInArrayFormat.length" class="alert alert-secondary my-3" role="alert">
   <ul *ngFor="let msg of message; let i = index">
-    <li><b>{{ msg }}</b></li>
+    <li>
+      <b>{{ msg }}</b>
+      <button mat-icon-button (click)="downloadFileInDocFormat(msg)">
+        <mat-icon>cloud_download</mat-icon>
+      </button>
+    </li>
   </ul>
 </div>
 
