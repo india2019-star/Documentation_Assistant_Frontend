@@ -43,8 +43,13 @@ export class GenericStreamingService {
         if (newChunk.trim()) {
           const chunks = newChunk.split('\n\n');
           chunks.forEach((chunk) => {
+            console.log(chunk);
             if (chunk.startsWith('data:')) {
-              let cleanedData =  chunk.replace(/^data:\s*/, '').replace(/^"|"$/g, '');
+              let cleanedData =  chunk.replace(/^data:\s*/, '')
+                                      .replace(/^"|"$/g, '')
+                                      .replace(/\\n/g, '<br>')
+                                      .replace(/\n\n/g, '<br><br>')
+                                      .replace(/\n/g,'<br>');
               onStreamData(cleanedData);
             }
           });
