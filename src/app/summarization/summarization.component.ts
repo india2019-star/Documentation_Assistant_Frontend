@@ -2,9 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { ChatBotService } from '../services/chat-bot.service';
-import { BehaviorSubject, combineLatest, map, of, startWith, Subscription } from 'rxjs';
-import { Functionality } from '../ircas.config';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { BehaviorSubject, combineLatest, startWith, Subscription } from 'rxjs';
 import { GenericStreamingService } from '../services/generic-streaming.service';
 
 @Component({
@@ -75,24 +73,6 @@ export class SummarizationComponent implements OnInit, OnDestroy {
       this.isLoading = true;
       file = this.selectedFiles[0];
       if (file) {
-        // this.subscription$.push(
-        //   this.genericService.summarizeDocument(file, (this.summaryFormGroup.get('userSummaryChoice') as FormControl).value)
-        //     .subscribe(res => {
-        //       console.log(res);
-        //       if (res.type === HttpEventType.UploadProgress) {
-        //         let progressValue = Math.round(100 * (res.loaded / (res.total ? res.total : 100)));
-        //         if (progressValue === 100) {
-        //            //to do
-        //         }
-        //       } else if (res instanceof HttpResponse) {
-        //         console.log(res);
-        //         this.isLoading = false;
-        //         this.summary = res.body ? res.body.toString() : "NO SUMMARY GENERATED";
-        //       }
-        //     }, error => {
-        //       this.isLoading = false;
-        //     })
-        // );
         this.buffer="";
         this.summary="";
         this.genericStreamingSerivce.uploadFileAndStream(file, 
@@ -101,8 +81,7 @@ export class SummarizationComponent implements OnInit, OnDestroy {
             // Update progress
           },
           (data) => {
-            this.summary += data; // Append streamed data
-            // this.throttleUIUpdate();
+            this.summary += data;
           },
           () => {
             this.isLoading = false;
@@ -119,16 +98,4 @@ export class SummarizationComponent implements OnInit, OnDestroy {
     this.selectFilesInArrayFormat = Array.from(event.target.files);
     this.selectedFilesSubject.next(this.selectFilesInArrayFormat);
   }
-
-  throttleUIUpdate(): void {
-    if (!this.updateInterval) {
-      this.updateInterval = setInterval(() => {
-        this.summary += this.buffer; // Append buffered data to the UI
-        this.buffer = ''; // Clear the buffer
-      }, 100); // Update UI every 100ms
-    }
-  }
-
-  
-
 }

@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ChatRequest } from '../models/chat-request';
@@ -33,17 +32,6 @@ export class ChatBotService {
   downloadFilesFromServer(fileName: string){
     return this.httpClient.get(`http://localhost:8000/download/${fileName}`,{
       responseType: 'blob'
-    });
-  }
-
-  summarizeDocument(file : File, summaryType: string){
-    const formData: FormData = new FormData();
-
-    formData.append('file', file);
-    formData.append('summary_type', summaryType);
-    return this.httpClient.post("http://localhost:8000/summarization", formData,{
-      reportProgress: true,
-      observe: 'events'
     });
   }
 }
