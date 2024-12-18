@@ -49,7 +49,8 @@ export class GenericStreamingService {
                                       .replace(/^"|"$/g, '')
                                       .replace(/\\n/g, '<br>')
                                       .replace(/\n\n/g, '<br><br>')
-                                      .replace(/\n/g,'<br>');
+                                      .replace(/\n/g,'<br>')
+                                      .replace(/\\t+/g, match => '&nbsp;'.repeat(match.length * 4));
               onStreamData(cleanedData);
             }
           });
